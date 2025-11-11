@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/stretchr/testify/suite"
 	"github.com/upper/db/v4"
 	"github.com/upper/db/v4/internal/sqlbuilder"
+	"github.com/upper/db/v4/internal/testsuite"
 )
 
 type AccountsStore struct {
@@ -78,21 +78,19 @@ func (*User) Store(sess db.Session) db.Store {
 }
 
 type RecordTestSuite struct {
-	suite.Suite
-
-	Helper
+	testsuite.RecordTestSuite
 }
 
+// AfterTest is called after each test.
 func (s *RecordTestSuite) AfterTest(suiteName, testName string) {
-	err := s.TearDown()
-	s.Require().NoError(err)
+	s.RecordTestSuite.AfterTest(suiteName, testName)
 }
 
+// BeforeTest is called before each test.
 func (s *RecordTestSuite) BeforeTest(suiteName, testName string) {
-	err := s.SetUp()
-	s.Require().NoError(err)
+	s.RecordTestSuite.BeforeTest(suiteName, testName)
 
-	sess := s.Helper.Session()
+	sess := s.Session()
 
 	cols, err := sess.Collections()
 	s.Require().NoError(err)

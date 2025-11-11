@@ -4,8 +4,8 @@ import (
 	"database/sql/driver"
 	"time"
 
-	"github.com/stretchr/testify/suite"
 	db "github.com/upper/db/v4"
+	"github.com/upper/db/v4/internal/testsuite"
 )
 
 type birthday struct {
@@ -91,19 +91,17 @@ func fib(i uint64) uint64 {
 }
 
 type GenericTestSuite struct {
-	suite.Suite
-
-	Helper
+	testsuite.GenericTestSuite
 }
 
+// AfterTest is called after each test.
 func (s *GenericTestSuite) AfterTest(suiteName, testName string) {
-	err := s.TearDown()
-	s.Require().NoError(err)
+	s.GenericTestSuite.AfterTest(suiteName, testName)
 }
 
+// BeforeTest is called before each test.
 func (s *GenericTestSuite) BeforeTest(suiteName, testName string) {
-	err := s.SetUp()
-	s.Require().NoError(err)
+	s.GenericTestSuite.BeforeTest(suiteName, testName)
 }
 
 func (s *GenericTestSuite) TestDatesAndUnicode() {

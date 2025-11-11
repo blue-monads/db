@@ -13,8 +13,8 @@ import (
 
 	detectrace "github.com/ipfs/go-detect-race"
 	"github.com/sirupsen/logrus"
-	"github.com/stretchr/testify/suite"
 	db "github.com/upper/db/v4"
+	"github.com/upper/db/v4/internal/testsuite"
 )
 
 type artistType struct {
@@ -55,19 +55,17 @@ func (f *customType) UnmarshalDB(in interface{}) error {
 }
 
 type SQLTestSuite struct {
-	suite.Suite
-
-	Helper
+	testsuite.SQLTestSuite
 }
 
+// AfterTest is called after each test.
 func (s *SQLTestSuite) AfterTest(suiteName, testName string) {
-	err := s.TearDown()
-	s.Require().NoError(err)
+	s.SQLTestSuite.AfterTest(suiteName, testName)
 }
 
+// BeforeTest is called before each test.
 func (s *SQLTestSuite) BeforeTest(suiteName, testName string) {
-	err := s.SetUp()
-	s.Require().NoError(err)
+	s.SQLTestSuite.BeforeTest(suiteName, testName)
 
 	sess := s.Session()
 

@@ -113,7 +113,9 @@ func Test(t *testing.T) {
 					t.Skip("Generic tests are disabled for this adapter")
 				}
 
-				suite.Run(t, &GenericTestSuite{Helper: helper})
+				gs := &GenericTestSuite{}
+				gs.Helper = helper
+				suite.Run(t, gs)
 			})
 
 			t.Run("Record", func(t *testing.T) {
@@ -121,7 +123,9 @@ func Test(t *testing.T) {
 					t.Skip("Record tests are disabled for this adapter")
 				}
 
-				suite.Run(t, &RecordTestSuite{Helper: helper})
+				rs := &RecordTestSuite{}
+				rs.Helper = helper
+				suite.Run(t, rs)
 			})
 
 			t.Run("SQL", func(t *testing.T) {
@@ -129,7 +133,9 @@ func Test(t *testing.T) {
 					t.Skip("SQL tests are disabled for this adapter")
 				}
 
-				suite.Run(t, &SQLTestSuite{Helper: helper})
+				ss := &SQLTestSuite{}
+				ss.Helper = helper
+				suite.Run(t, ss)
 			})
 		})
 	}
