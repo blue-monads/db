@@ -29,7 +29,10 @@ import (
 	"database/sql"
 	"fmt"
 
-	_ "github.com/mattn/go-sqlite3" // SQLite3 driver.
+	_ "github.com/ncruces/go-sqlite3/driver"
+	_ "github.com/ncruces/go-sqlite3/embed"
+
+	// _ "github.com/mattn/go-sqlite3" // SQLite3 driver.
 	db "github.com/upper/db/v4"
 	"github.com/upper/db/v4/internal/sqladapter"
 	"github.com/upper/db/v4/internal/sqladapter/compat"
