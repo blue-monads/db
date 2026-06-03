@@ -156,7 +156,7 @@ func (*database) TableExists(sess sqladapter.Session, name string) error {
 func (*database) PrimaryKeys(sess sqladapter.Session, tableName string) ([]string, error) {
 	pk := make([]string, 0, 1)
 
-	stmt := exql.RawSQL(fmt.Sprintf("PRAGMA TABLE_INFO('%s')", tableName))
+	stmt := exql.RawSQL(fmt.Sprintf("PRAGMA table_info('%s')", tableName))
 
 	rows, err := sess.SQL().Query(stmt)
 	if err != nil {
