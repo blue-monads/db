@@ -29,8 +29,8 @@ import (
 	"database/sql"
 	"fmt"
 
-	_ "github.com/ncruces/go-sqlite3/driver"
-	_ "github.com/ncruces/go-sqlite3/embed"
+	// _ "github.com/ncruces/go-sqlite3/driver"
+	// _ "github.com/ncruces/go-sqlite3/embed"
 
 	// _ "github.com/mattn/go-sqlite3" // SQLite3 driver.
 	db "github.com/upper/db/v4"
